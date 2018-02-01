@@ -1,0 +1,7 @@
+.ipynb_checkpoints/
+*.pdf
+*.ipynb
+k/
+cluster/
+data/
+*.csv

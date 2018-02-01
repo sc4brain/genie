@@ -1,0 +1,12 @@
+*.pyc
+
+neuron_kplus/
+tmp/
+__pycache__/
+example/x86_64/
+.python-version
+result.csv
+*.swp
+tests/.ipynb_checkpoints/
+analyze/.ipynb_checkpoints/
+data/

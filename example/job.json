@@ -1,0 +1,77 @@
+{
+    "build" : {
+        "build": {
+            "neuron_path": "../nrn-7.2",
+            "specials_path": "../specials"
+        },
+        "build_config_cluster": {
+            "options": [
+              "--without-iv",
+              "--without-x",
+              "--without-nrnoc-x11",
+              "--with-paranrn",
+              "--with-mpi",
+              "--with-multisend",
+              "--enable-shared=no",
+              "--enable-static=yes"
+            ],
+            "compile_options": {
+              "linux_nrnmech":"no",
+              "use_pthread":"no",
+              "CFLAGS":"\"-O3 -fopenmp -DKPLUS -DKPLUS_GATHER_SCATTER -DKPLUS_SPAWN -DCLUSTER_USE_OMP\"",
+              "CXXFLAGS":"\"-O3 -fopenmp -DKPLUS -DKPLUS_GATHER_SCATTER -DKPLUS_SPAWN -DCLUSTER_USE_OMP\"",
+              "CC":"mpicc"
+            }
+        },
+        "build_config_k": {
+            "options": [
+              "--without-x",
+              "--without-nmodl",
+              "--without-nrnoc-x11",
+              "--host=sparc64-unknown-linux-gnu",
+              "--build=x86_64-unknown-linux-gnu",
+              "--with-paranrn",
+              "--with-mpi",
+              "--with-multisend",
+              "--enable-shared=no",
+              "--enable-static=yes"
+            ],
+            "compile_options": {
+              "linux_nrnmech":"no",
+              "use_pthread":"no",
+              "CFLAGS":"\"-Kfast -DKPLUS -DKPLUS_GATHER_SCATTER -DKPLUS_SPAWN -DCLUSTER_USE_OMP\"",
+              "CXXFLAGS":"\"-Kfast -DKPLUS -DKPLUS_GATHER_SCATTER -DKPLUS_SPAWN -DCLUSTER_USE_OMP\"",
+              "CC":"mpifccpx",
+              "CXX":"mpiFCCpx",
+              "MPICC":"mpifccpx",
+              "MPICXX":"mpiFCCpx"
+            }
+        }
+    },
+    "job" : {
+        "job_cluster": {
+            "nodes":"1",
+            "ppn":"23,28,1",
+            "modules": [
+            ],
+            "omp_num_threads": "[1, 2, 3, 4, 5, 6, 7, 8, 9,  11, 13, 14, 16]",
+            "nrniv": "../specials/x86_64/special -mpi",
+            "hoc_name": "../hoc/bench_main.hoc",
+            "stop_time": 250,
+            "nthread": 16,
+            "prof": ""
+        },
+        "job_k": {
+            "nodes":"8",
+            "ppn":"1,8,1",
+            "modules": [
+            ],
+            "omp_num_threads": "1,16,1",
+            "nrniv": "./special -mpi",
+            "hoc_name": "./bench_main.hoc",
+            "stop_time": 100,
+            "nthread": 16,
+            "prof": ""
+        }
+    }
+}
